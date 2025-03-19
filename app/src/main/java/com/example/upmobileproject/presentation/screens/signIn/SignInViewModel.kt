@@ -54,4 +54,18 @@ class SignInViewModel : ViewModel() {
             }
         }
     }
+    fun goRegister(navHostController: NavHostController){
+        navHostController.navigate(NavigationRoutes.REGISTER){
+            popUpTo(NavigationRoutes.SIGNIN){
+                inclusive = true
+            }
+        }
+    }
+    fun goForgotPass(navHostController: NavHostController){
+        navHostController.navigate(NavigationRoutes.FORGOTPASS){
+            popUpTo(NavigationRoutes.SIGNIN){
+                inclusive = true
+            }
+        }
+    }
 }

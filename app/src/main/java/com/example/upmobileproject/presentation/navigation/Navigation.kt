@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.upmobileproject.presentation.screens.forgotpass.ForgotPassword
 import com.example.upmobileproject.presentation.screens.home.Home
 import com.example.upmobileproject.presentation.screens.registration.Register
 import com.example.upmobileproject.presentation.screens.signIn.SignIn
@@ -22,6 +23,12 @@ fun Navigation(controller: NavHostController){
         }
         composable(NavigationRoutes.REGISTER){
             Register(controller)
+        }
+        composable(NavigationRoutes.SIGNIN){
+            SignIn(controller)
+        }
+        composable(NavigationRoutes.FORGOTPASS){
+            ForgotPassword(controller)
         }
         composable(NavigationRoutes.SIGNIN){
             SignIn(controller)

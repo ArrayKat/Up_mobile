@@ -6,5 +6,6 @@ object NavigationRoutes {
     const val SIGNIN = "signIn";
     const val FORGOTPASS = "forgotpass";
     const val VERIFICATION = "verificetion";
+    const val CREATEPASS = "createpass";
     const val HOME = "home";
 }

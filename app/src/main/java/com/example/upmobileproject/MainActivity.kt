@@ -1,4 +1,4 @@
-package com.example.upmobileproject.presentation.navigation
+package com.example.upmobileproject
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
+import com.example.upmobileproject.presentation.navigation.Navigation
 import com.example.upmobileproject.presentation.ui.theme.UpMobileProjectTheme
 
 class MainActivity : ComponentActivity() {
