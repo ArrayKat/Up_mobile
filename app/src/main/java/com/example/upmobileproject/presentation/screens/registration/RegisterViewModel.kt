@@ -1,5 +1,6 @@
 package com.example.upmobileproject.presentation.screens.registration
 
+import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
@@ -62,7 +63,7 @@ class RegisterViewModel : ViewModel() {
     val errorMessage = MutableStateFlow("")
 
     // Функция для регистрации
-    fun register(navHostController: NavHostController) {
+    fun register(navHostController: NavHostController, context: Context) {
         if(name.value!= "" && emailU.value!= "" && passwordU.value!=""){
             if(isValidEmail(emailU.value)){
                 if(isValidPass(passwordU.value)) {
@@ -105,28 +106,24 @@ class RegisterViewModel : ViewModel() {
                                 }
                             }
                         } catch (e: Exception) {
-                            showErrorDialog.value = true
-                            errorMessage.value = "Что то пошло не так. ${e.message.toString()}"
+                            Toast.makeText(context, "Что то пошло не так. ${e.message.toString()}", Toast.LENGTH_SHORT).show()
                         }
 
                     } else {
-                        showErrorDialog.value = true
-                        errorMessage.value = "Вы не согласились с обработкой данных."
+                        Toast.makeText(context, "Вы не согласились с обработкой данных.", Toast.LENGTH_SHORT).show()
                     }
                 }
                 else{
-                    showErrorDialog.value = true
-                    errorMessage.value = "Некорректный пароль. Пожалуйста, придумайте пароль, содержащий более 6 символов."
+                    Toast.makeText(context, "Некорректный пароль. Пожалуйста, придумайте пароль, содержащий более 6 символов.", Toast.LENGTH_SHORT).show()
                 }
             }
             else{
-                showErrorDialog.value = true
-                errorMessage.value = "Некорректный email. Пожалуйста, введите email в формате name@domenname.com"
+                Toast.makeText(context, "Некорректный email. Пожалуйста, введите email в формате name@domenname.com", Toast.LENGTH_SHORT).show()
+
             }
         }
         else{
-            showErrorDialog.value = true
-            errorMessage.value = "Пустые поля. Пожалуйста, заполните все поля."
+            Toast.makeText(context, "Пустые поля. Пожалуйста, заполните все поля.", Toast.LENGTH_SHORT).show()
         }
 
     }

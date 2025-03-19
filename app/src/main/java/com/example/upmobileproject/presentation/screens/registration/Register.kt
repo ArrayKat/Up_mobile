@@ -18,6 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -32,7 +33,7 @@ fun Register (controller: NavHostController) {
     val email by viewModel.emailU.collectAsState()
     val password by viewModel.passwordU.collectAsState()
     val agreeToTerms by viewModel.agreeToTerms.collectAsState()
-
+    val context = LocalContext.current
     Column(
         modifier = Modifier
             .background(Color.White)
@@ -96,7 +97,7 @@ fun Register (controller: NavHostController) {
         }
 
         Button(
-            onClick = { viewModel.register(controller) },
+            onClick = { viewModel.register(controller, context) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 8.dp)
