@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.upmobileproject.presentation.screens.home.Home
 import com.example.upmobileproject.presentation.screens.registration.Register
 import com.example.upmobileproject.presentation.screens.signIn.SignIn
 import com.example.upmobileproject.presentation.screens.splash.Splash
@@ -24,6 +25,9 @@ fun Navigation(controller: NavHostController){
         }
         composable(NavigationRoutes.SIGNIN){
             SignIn(controller)
+        }
+        composable(NavigationRoutes.HOME){
+            Home(controller)
         }
     }
 }

@@ -1,10 +1,12 @@
 package com.example.upmobileproject.presentation.screens.registration
 
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
@@ -15,30 +17,39 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.upmobileproject.presentation.comopnents.CustomTextField
 
 @Composable
 fun Register (controller: NavHostController) {
-    val viewModel = RegisterViewModel()
+    val viewModel: RegisterViewModel = viewModel()
     val name by viewModel.name.collectAsState()
-    val email by viewModel.email.collectAsState()
-    val password by viewModel.password.collectAsState()
+    val email by viewModel.emailU.collectAsState()
+    val password by viewModel.passwordU.collectAsState()
     val agreeToTerms by viewModel.agreeToTerms.collectAsState()
 
     Column(
         modifier = Modifier
+            .background(Color.White)
             .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
+            .padding(horizontal = 20.dp),
+
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Spacer(modifier = Modifier.height(120.dp))
         Text(
             text = "Регистрация",
-            fontSize = 24.sp,
+            fontSize = 32.sp
+        )
+
+        Text(
+            text = "Заполните свои данные",
+            fontSize = 16.sp,
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
@@ -46,7 +57,8 @@ fun Register (controller: NavHostController) {
             label = "Ваше имя",
             value = name,
             onValueChange = { viewModel.updateName(it) },
-            modifier = Modifier.padding(bottom = 8.dp)
+            placeholder = "xxxxxxxx",
+            modifier = Modifier.padding(bottom = 8.dp, top = 54.dp)
         )
 
         CustomTextField(
@@ -54,6 +66,7 @@ fun Register (controller: NavHostController) {
             value = email,
             onValueChange = { viewModel.updateEmail(it) },
             keyboardType = KeyboardType.Email,
+            placeholder = "xyz@gmail.com",
             modifier = Modifier.padding(bottom = 8.dp)
         )
 
@@ -62,6 +75,7 @@ fun Register (controller: NavHostController) {
             value = password,
             onValueChange = { viewModel.updatePassword(it) },
             isPassword = true,
+            placeholder = "********",
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
@@ -73,7 +87,7 @@ fun Register (controller: NavHostController) {
         ) {
             Checkbox(
                 checked = agreeToTerms,
-                onCheckedChange = { }
+                onCheckedChange = { viewModel.updateAgreeToTerms(it)}
             )
             Text(
                 text = "Даю согласие на обработку персональных данных",
@@ -82,14 +96,14 @@ fun Register (controller: NavHostController) {
         }
 
         Button(
-            onClick = { viewModel.register() },
+            onClick = { viewModel.register(controller) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 8.dp)
         ) {
             Text("Зарегистрироваться")
         }
-
+        Spacer(modifier = Modifier.height(110.dp))
         TextButton(
             onClick = { /* Navigate to login */ }
         ) {

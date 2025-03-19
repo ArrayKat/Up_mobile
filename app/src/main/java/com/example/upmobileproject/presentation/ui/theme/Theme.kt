@@ -1,4 +1,4 @@
-package com.example.upmobileproject.ui.theme
+package com.example.upmobileproject.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build
