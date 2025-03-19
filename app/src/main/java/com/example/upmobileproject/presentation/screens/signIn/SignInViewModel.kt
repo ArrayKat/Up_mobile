@@ -9,14 +9,31 @@ import com.example.upmobileproject.domain.Constants
 import com.example.upmobileproject.presentation.navigation.NavigationRoutes
 import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.gotrue.providers.builtin.Email
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class SignInViewModel : ViewModel() {
-    var emailU = mutableStateOf("")
-    var passwordU = mutableStateOf("")
+
+    // Состояние для email
+    private val _email = MutableStateFlow("")
+    val emailU: StateFlow<String> get() = _email
+
+    // Состояние для пароля
+    private val _password = MutableStateFlow("")
+    val passwordU: StateFlow<String> get() = _password
+
+    fun updateEmail(newEmail: String) {
+        _email.value = newEmail
+    }
+
+    fun updatePassword(newPassword: String) {
+        _password.value = newPassword
+    }
 
     val openDialog = mutableStateOf(false)
     val textError = mutableStateOf("")
+
     fun SignIn(navHostController: NavHostController){
         viewModelScope.launch {
             try{

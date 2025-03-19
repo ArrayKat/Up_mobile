@@ -62,6 +62,15 @@ class RegisterViewModel : ViewModel() {
     val showErrorDialog = MutableStateFlow(false)
     val errorMessage = MutableStateFlow("")
 
+    fun goSignIn(controller: NavHostController){
+        viewModelScope.launch {
+            controller.navigate(NavigationRoutes.SIGNIN) {
+                popUpTo(NavigationRoutes.REGISTER) {
+                    inclusive = true
+                }
+            }
+        }
+    }
     // Функция для регистрации
     fun register(navHostController: NavHostController, context: Context) {
         if(name.value!= "" && emailU.value!= "" && passwordU.value!=""){

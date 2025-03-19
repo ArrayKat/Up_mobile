@@ -106,7 +106,7 @@ fun Register (controller: NavHostController) {
         }
         Spacer(modifier = Modifier.height(110.dp))
         TextButton(
-            onClick = { /* Navigate to login */ }
+            onClick = { viewModel.goSignIn(controller)}
         ) {
             Text("Есть аккаунт? Войти")
         }
