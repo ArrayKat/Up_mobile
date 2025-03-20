@@ -1,4 +1,4 @@
-package com.example.upmobileproject.presentation.screens.forgotpass
+package com.example.upmobileproject.presentation.screens.verification
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -23,12 +22,12 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.upmobileproject.presentation.comopnents.CustomTextField
-import com.example.upmobileproject.presentation.screens.signIn.SignInViewModel
+import com.example.upmobileproject.presentation.screens.forgotpass.ForgotPasswordViewModel
 
 @Composable
-fun ForgotPassword (controller: NavHostController) {
-    val viewModel: ForgotPasswordViewModel = viewModel()
-    val email by viewModel.emailU.collectAsState()
+fun Verification (controller: NavHostController, emailU:String){
+    val viewModel: VerificationViewModel = viewModel()
+    val token by viewModel.token.collectAsState()
     val context = LocalContext.current
     Column(
         modifier = Modifier
@@ -40,35 +39,34 @@ fun ForgotPassword (controller: NavHostController) {
     ) {
         Spacer(modifier = Modifier.height(120.dp))
         Text(
-            text = "Забыл Пароль",
+            text = "OTP Проверка",
             fontSize = 32.sp
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
-            text = "Введите Свою Учетную Запись Для Сброса",
+            text = "Пожалуйста, Проверьте Свою Электронную Почту, Чтобы Увидеть Код Подтверждения",
             fontSize = 16.sp,
             modifier = Modifier.padding(bottom = 16.dp)
         )
         Spacer(modifier = Modifier.height(55.dp))
 
         CustomTextField(
-            label = "Email",
-            value = email,
-            onValueChange = { viewModel.updateEmail(it) },
-            keyboardType = KeyboardType.Email,
-            placeholder = "xyz@gmail.com",
+            label = "OTP Код",
+            value = token,
+            onValueChange = { viewModel.updateToken(it) },
+            keyboardType = KeyboardType.Number,
+            placeholder = "000000",
             modifier = Modifier.padding(bottom = 8.dp)
         )
         Spacer(modifier = Modifier.height(30.dp))
 
-
         Button(
-            onClick = { viewModel.sendEmail(controller, context) },
+            onClick = { viewModel.checkCode(emailU, controller, context) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 8.dp)
         ) {
-            Text("Отправить")
+            Text("Проверить")
         }
         Spacer(modifier = Modifier.height(210.dp))
 
