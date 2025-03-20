@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.upmobileproject.presentation.screens.catalog.Catalog
 import com.example.upmobileproject.presentation.screens.createpass.CreatePassword
 import com.example.upmobileproject.presentation.screens.forgotpass.ForgotPassword
 import com.example.upmobileproject.presentation.screens.home.Home
@@ -45,6 +46,11 @@ fun Navigation(controller: NavHostController){
         }
         composable(NavigationRoutes.HOME){
             Home(controller)
+        }
+        composable(NavigationRoutes.CATALOG + "/{idCategory}"){
+            arg ->
+            val idCategory = arg.arguments?.getString("idCategory")
+            Catalog(controller, idCategory ?:"0" )
         }
     }
 }

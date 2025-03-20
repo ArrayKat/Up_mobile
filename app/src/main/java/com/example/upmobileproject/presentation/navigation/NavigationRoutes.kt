@@ -8,4 +8,5 @@ object NavigationRoutes {
     const val VERIFICATION = "verificetion";
     const val CREATEPASS = "createpass";
     const val HOME = "home";
+    const val CATALOG = "catalog";
 }

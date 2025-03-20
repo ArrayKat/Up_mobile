@@ -1,12 +1,15 @@
-package com.example.upmobileproject.presentation.screens.home
+package com.example.upmobileproject.presentation.screens.catalog
 
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,25 +17,31 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.example.upmobileproject.R
+import com.example.upmobileproject.data.models.Category
+import com.example.upmobileproject.presentation.comopnents.CustomButtonBack
 import com.example.upmobileproject.presentation.comopnents.home.CategoryCard
 import com.example.upmobileproject.presentation.comopnents.home.ProductCard
+import com.example.upmobileproject.presentation.screens.home.HomeViewModel
 
 @Composable
-fun Home (controller: NavHostController) {
-    val viewModel: HomeViewModel = viewModel()
+fun Catalog (controller: NavHostController, idCategory: String) {
+    val viewModel: CatalogViewModel = viewModel()
     LaunchedEffect(Unit) {
-        viewModel.GetData()
+        viewModel.GetData(idCategory)
     }
-    Column (
 
-    ) {
-        Spacer(modifier = Modifier.height(140.dp))
+    Column {
+
+        Spacer(modifier = Modifier.height(48.dp))
+        Row{
+            CustomButtonBack(onConfirm = {viewModel.goBack(controller)})
+
+        }
+
         Text(
             text = "Категории",
             fontSize = 20.sp,
@@ -47,48 +56,29 @@ fun Home (controller: NavHostController) {
             items(viewModel.categoryList){ category ->
                 CategoryCard(
                     category = category,
-                    isSelected = false,
-                    onClick = {viewModel.GoCatalog(controller, category.id)}
+                    isSelected = viewModel.idCategoryCurrent.value == category.id,
+                    onClick = {viewModel.GetProductCategory(category.id)}
                 )
 
             }
         }
-        Text(
-            text = "Популярное",
-            fontSize = 20.sp,
-            color = Color.Black,
-            modifier = Modifier.padding(horizontal = 20.dp)
-        )
-        Spacer(modifier = Modifier.height(34.dp))
-        LazyRow (
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(start = 10.dp)
-        ){
-            items(viewModel.productList.value) { product ->
+        Spacer(modifier = Modifier.height(25.dp))
 
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            horizontalArrangement = Arrangement.spacedBy(15.dp),
+            verticalArrangement = Arrangement.spacedBy(15.dp)
+        ) {
+            items(viewModel.productList) { product ->
                 ProductCard(
                     product = product,
-                    onLikeClick = {}
+                    onLikeClick = {} // Обработчик нажатия на "лайк"
                 )
-
             }
         }
-        Spacer(modifier = Modifier.height(29.dp))
-        Text(
-            text = "Акции",
-            fontSize = 20.sp,
-            color = Color.Black,
-            modifier = Modifier.padding(horizontal = 20.dp)
-        )
-        Spacer(modifier = Modifier.height(34.dp))
-        Image(
-            painter = painterResource(R.drawable.sale),
-            contentDescription = "",
-            modifier = Modifier
-                .width(400.dp)
-                .height(120.dp)
-        )
     }
-
-
 }
+
+
+
+

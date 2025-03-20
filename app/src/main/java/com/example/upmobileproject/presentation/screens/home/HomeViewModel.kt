@@ -5,9 +5,11 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavHostController
 import com.example.upmobileproject.data.models.Category
 import com.example.upmobileproject.data.models.Product
 import com.example.upmobileproject.domain.Constants
+import com.example.upmobileproject.presentation.navigation.NavigationRoutes
 import io.github.jan.supabase.postgrest.from
 import kotlinx.coroutines.launch
 
@@ -15,7 +17,7 @@ class HomeViewModel :ViewModel() {
     val productList = mutableStateOf<List<Product>>(emptyList())
     val categoryList = mutableStateListOf<Category>()
 
-    fun GetProducts(){
+    fun GetData(){
         viewModelScope.launch {
             try{
                 val result = Constants.Supabase.from("products").select().decodeList<Product>()
@@ -27,6 +29,14 @@ class HomeViewModel :ViewModel() {
             }
             catch (e:Exception){
                 Log.d("category", e.message.toString())
+            }
+        }
+    }
+
+    fun GoCatalog(controller: NavHostController, idCategory: String){
+        controller.navigate(NavigationRoutes.CATALOG + "/${idCategory}") {
+            popUpTo(NavigationRoutes.HOME) {
+                inclusive = true
             }
         }
     }

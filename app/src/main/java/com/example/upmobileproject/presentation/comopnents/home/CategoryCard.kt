@@ -1,5 +1,6 @@
 package com.example.upmobileproject.presentation.comopnents.home
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,14 +26,24 @@ import com.example.upmobileproject.data.models.Product
 @Composable
 fun CategoryCard(
     category: Category,
+    isSelected: Boolean, // Параметр для определения, выбрана ли категория
     onClick: () -> Unit // Обработчик нажатия по категории
 ) {
     Card(
+        onClick = onClick,
         modifier = Modifier
             .width(110.dp)
             .padding(8.dp),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White)
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White, // Белый фон
+            contentColor = if (isSelected) Color(0xFF48B2E7) else Color.Transparent // Цвет рамки
+        ),
+        border = if (isSelected) {
+            BorderStroke(2.dp, Color(0xFF48B2E7)) // Рамка, если категория выбрана
+        } else {
+            null // Нет рамки, если категория не выбрана
+        }
     ) {
         Box(
             modifier = Modifier
