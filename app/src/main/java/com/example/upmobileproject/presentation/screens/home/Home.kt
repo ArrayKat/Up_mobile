@@ -86,8 +86,19 @@ fun Home (controller: NavHostController) {
                     viewModel.search.value = it
                 },
                 modifier = Modifier.weight(1f),
+
                 shape = RoundedCornerShape(15.dp),
                 singleLine = true,
+                colors = TextFieldDefaults.colors(
+                    unfocusedTextColor = Color.Black,
+                    unfocusedContainerColor = Color.White,
+                    focusedContainerColor = Color.White,
+                    focusedTextColor = Color.Black,
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                    disabledIndicatorColor = Color.Transparent,
+                    disabledContainerColor = Color.White
+                ),
                 leadingIcon = {
                     Icon(
                         imageVector = ImageVector.vectorResource(id = R.drawable.ic_search),
