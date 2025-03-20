@@ -54,4 +54,12 @@ class ForgotPasswordViewModel : ViewModel() {
             }
         }
     }
+    fun goBack(controller: NavHostController){
+        controller.navigate(NavigationRoutes.SIGNIN) {
+            popUpTo(NavigationRoutes.FORGOTPASS) {
+                inclusive = true
+            }
+        }
+
+    }
 }

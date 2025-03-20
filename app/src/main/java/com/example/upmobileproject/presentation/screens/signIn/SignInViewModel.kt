@@ -34,6 +34,14 @@ class SignInViewModel : ViewModel() {
     val openDialog = mutableStateOf(false)
     val textError = mutableStateOf("")
 
+    fun goBack(controller: NavHostController){
+        controller.navigate(NavigationRoutes.REGISTER) {
+            popUpTo(NavigationRoutes.SIGNIN) {
+                inclusive = true
+            }
+        }
+
+    }
     fun SignIn(navHostController: NavHostController){
         viewModelScope.launch {
             try{

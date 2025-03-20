@@ -60,5 +60,13 @@ class CreatePasswordViewModel : ViewModel(){
 
     }
 
+    fun goBack(controller: NavHostController){
+        controller.navigate(NavigationRoutes.SIGNIN) {
+            popUpTo(NavigationRoutes.CREATEPASS) {
+                inclusive = true
+            }
+        }
+
+    }
 
 }

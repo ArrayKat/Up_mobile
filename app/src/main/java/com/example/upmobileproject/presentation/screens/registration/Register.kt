@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.example.upmobileproject.presentation.comopnents.CustomButtonBack
 import com.example.upmobileproject.presentation.comopnents.CustomTextField
 
 @Composable
@@ -42,7 +43,9 @@ fun Register (controller: NavHostController) {
 
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(120.dp))
+        Spacer(modifier = Modifier.height(65.dp))
+        CustomButtonBack(onConfirm = {viewModel.goBack(controller)})
+        Spacer(modifier = Modifier.height(10.dp))
         Text(
             text = "Регистрация",
             fontSize = 32.sp

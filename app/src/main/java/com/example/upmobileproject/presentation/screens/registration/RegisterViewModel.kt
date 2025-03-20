@@ -62,6 +62,14 @@ class RegisterViewModel : ViewModel() {
     val showErrorDialog = MutableStateFlow(false)
     val errorMessage = MutableStateFlow("")
 
+    fun goBack(controller: NavHostController){
+        controller.navigate(NavigationRoutes.SPLASH) {
+            popUpTo(NavigationRoutes.REGISTER) {
+                inclusive = true
+            }
+        }
+
+    }
     fun goSignIn(controller: NavHostController){
         viewModelScope.launch {
             controller.navigate(NavigationRoutes.SIGNIN) {

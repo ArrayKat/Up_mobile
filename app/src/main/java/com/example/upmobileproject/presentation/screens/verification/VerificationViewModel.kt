@@ -45,5 +45,13 @@ class VerificationViewModel: ViewModel() {
 
     }
 
+    fun goBack(controller: NavHostController){
+        controller.navigate(NavigationRoutes.FORGOTPASS) {
+            popUpTo(NavigationRoutes.VERIFICATION) {
+                inclusive = true
+            }
+        }
+
+    }
 
 }
