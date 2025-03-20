@@ -39,7 +39,6 @@ class ForgotPasswordViewModel : ViewModel() {
                 )
             }
             updateShowDialog(true)
-            Toast.makeText(context, "Проверьте Ваш Email", Toast.LENGTH_SHORT).show()
         }
         catch (e:Exception){
             Toast.makeText(context, "Возникла ошибка: ${e.message}", Toast.LENGTH_SHORT).show()

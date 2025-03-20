@@ -19,7 +19,7 @@ import com.example.upmobileproject.presentation.screens.verification.Verificatio
 fun Navigation(controller: NavHostController){
     NavHost(
         navController = controller,
-        startDestination = NavigationRoutes.HOME
+        startDestination = NavigationRoutes.REGISTER
     ) {
         composable(NavigationRoutes.SPLASH){
             Splash(controller)

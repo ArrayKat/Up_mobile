@@ -1,4 +1,4 @@
-package com.example.upmobileproject.presentation.comopnents.home
+package com.example.upmobileproject.presentation.comopnents.CustomCard
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

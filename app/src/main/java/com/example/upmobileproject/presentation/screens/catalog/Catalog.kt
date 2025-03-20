@@ -21,11 +21,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.example.upmobileproject.data.models.Category
 import com.example.upmobileproject.presentation.comopnents.CustomButtonBack
-import com.example.upmobileproject.presentation.comopnents.home.CategoryCard
-import com.example.upmobileproject.presentation.comopnents.home.ProductCard
-import com.example.upmobileproject.presentation.screens.home.HomeViewModel
+import com.example.upmobileproject.presentation.comopnents.CustomCard.CategoryCard
+import com.example.upmobileproject.presentation.comopnents.CustomCard.ProductCard
 
 @Composable
 fun Catalog (controller: NavHostController, idCategory: String) {
