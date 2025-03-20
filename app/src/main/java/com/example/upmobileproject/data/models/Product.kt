@@ -1,7 +1,10 @@
 package com.example.upmobileproject.data.models
 
-data class products (
-    val id:Int =0,
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class Product (
+    val id:String ="",
     val title:String ="",
     val category_id: String ="",
     val cost: Int=0,
