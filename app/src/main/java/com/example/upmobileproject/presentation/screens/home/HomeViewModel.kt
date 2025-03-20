@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 class HomeViewModel :ViewModel() {
     val productList = mutableStateOf<List<Product>>(emptyList())
     val categoryList = mutableStateListOf<Category>()
-
+    val search = mutableStateOf("")
     fun GetData(){
         viewModelScope.launch {
             try{

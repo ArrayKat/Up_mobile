@@ -36,8 +36,8 @@ fun CategoryCard(
             .padding(8.dp),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color.White, // Белый фон
-            contentColor = if (isSelected) Color(0xFF48B2E7) else Color.Transparent // Цвет рамки
+            containerColor = if (isSelected) Color(0xFF48B2E7) else Color.White, // Цвет фона карточки
+            contentColor = if (isSelected) Color.White else Color.Black // Цвет текста
         ),
         border = if (isSelected) {
             BorderStroke(2.dp, Color(0xFF48B2E7)) // Рамка, если категория выбрана
@@ -54,7 +54,8 @@ fun CategoryCard(
             Text(
                 text = category.title,
                 fontSize = 14.sp,
-                color = Color.Black,
+                fontWeight = FontWeight.Medium,
+                color = if (isSelected) Color.White else Color.Black, // Цвет текста в зависимости от выбора
                 modifier = Modifier.padding(horizontal = 8.dp)
             )
         }
