@@ -42,7 +42,5 @@ class ForgotPasswordViewModel : ViewModel() {
         catch (e:Exception){
             Toast.makeText(context, "Возникла ошибка: ${e.message}", Toast.LENGTH_SHORT).show()
         }
-
-
     }
 }

@@ -48,6 +48,7 @@ fun SignIn (controller: NavHostController) {
 
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
         Spacer(modifier = Modifier.height(120.dp))
         Text(
             text = "Привет!",
