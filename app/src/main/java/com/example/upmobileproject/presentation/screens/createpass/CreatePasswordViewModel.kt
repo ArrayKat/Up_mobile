@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import com.example.upmobileproject.domain.Constants
+import com.example.upmobileproject.presentation.navigation.NavigationRoutes
 import io.github.jan.supabase.gotrue.auth
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -42,6 +43,11 @@ class CreatePasswordViewModel : ViewModel(){
                         password = passwordU1.value
                     }
                     Toast.makeText(context, "Вы успешно поменяли пароль!", Toast.LENGTH_SHORT).show()
+                    controller.navigate(NavigationRoutes.SIGNIN) {
+                        popUpTo(NavigationRoutes.CREATEPASS) {
+                            inclusive = true
+                        }
+                    }
                 }
                 else{
                     Toast.makeText(context, "Проверьте что 2 пароля совпадают.", Toast.LENGTH_SHORT).show()

@@ -24,23 +24,34 @@ class ForgotPasswordViewModel : ViewModel() {
         _email.value = newEmail
     }
 
-    fun  sendEmail(controller: NavHostController, context: Context){
+    private val _showDialog = MutableStateFlow(false)
+    val showDialog: StateFlow<Boolean> get() = _showDialog
+
+    fun updateShowDialog(newValue: Boolean) {
+        _showDialog.value = newValue
+    }
+
+    fun  sendEmail( context: Context){
         try{
             viewModelScope.launch {
                 Constants.Supabase.auth.resetPasswordForEmail(
                     email = emailU.value
                 )
             }
+            updateShowDialog(true)
             Toast.makeText(context, "Проверьте Ваш Email", Toast.LENGTH_SHORT).show()
-            controller.navigate(NavigationRoutes.VERIFICATION + "/${emailU.value}") {
-                popUpTo(NavigationRoutes.FORGOTPASS) {
-                    inclusive = true
-                }
-            }
-
         }
         catch (e:Exception){
             Toast.makeText(context, "Возникла ошибка: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun goVerificationPage(controller: NavHostController,){
+
+        controller.navigate(NavigationRoutes.VERIFICATION + "/${emailU.value}") {
+            popUpTo(NavigationRoutes.FORGOTPASS) {
+                inclusive = true
+            }
         }
     }
 }

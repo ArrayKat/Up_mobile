@@ -13,6 +13,9 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.example.upmobileproject.presentation.comopnents.CustomDialog
 import com.example.upmobileproject.presentation.comopnents.CustomTextField
 import com.example.upmobileproject.presentation.screens.signIn.SignInViewModel
 
@@ -29,7 +33,9 @@ import com.example.upmobileproject.presentation.screens.signIn.SignInViewModel
 fun ForgotPassword (controller: NavHostController) {
     val viewModel: ForgotPasswordViewModel = viewModel()
     val email by viewModel.emailU.collectAsState()
+    val showDialog by viewModel.showDialog.collectAsState()
     val context = LocalContext.current
+
     Column(
         modifier = Modifier
             .background(Color.White)
@@ -63,7 +69,7 @@ fun ForgotPassword (controller: NavHostController) {
 
 
         Button(
-            onClick = { viewModel.sendEmail(controller, context) },
+            onClick = { viewModel.sendEmail( context) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 8.dp)
@@ -72,5 +78,14 @@ fun ForgotPassword (controller: NavHostController) {
         }
         Spacer(modifier = Modifier.height(210.dp))
 
+        if (showDialog) {
+            CustomDialog(
+                onDismiss = { viewModel.updateShowDialog(false)},
+                onConfirm = {
+                    viewModel.updateShowDialog(false)
+                    viewModel.goVerificationPage(controller)
+                }
+            )
+        }
     }
 }
